@@ -1,3 +1,0 @@
-/etc/passwd:root:*:0:0:System Administrator:/var/root:/bin/sh
-/etc/passwd:daemon:*:1:1:System Services:/var/root:/usr/bin/false
-/etc/passwd:_cvmsroot:*:212:212:CVMS Root:/var/empty:/usr/bin/false
