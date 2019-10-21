@@ -14,10 +14,10 @@
   </parent>
 
   <distributionManagement>
-          <repository>
+          <snapshotRepository>
               <id>PetClinic_Snapshot</id>
               <url>http://nexus:8081/repository/PetClinic_Snapshot/</url>
-          </repository>
+          </snapshotRepository>
   </distributionManagement>
 
   <name>petclinic</name>
