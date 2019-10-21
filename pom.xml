@@ -15,8 +15,8 @@
 
   <distributionManagement>
           <repository>
-              <id>deployment</id>
-              <url>http://nexus:8081/repository/Pet-clinic/</url>
+              <id>Nexus</id>
+              <url>http://nexus:8081/repository/PetClinic_Snapshot/</url>
           </repository>
   </distributionManagement>
 
