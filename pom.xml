@@ -234,11 +234,11 @@
           <autoVersionSubmodules>true</autoVersionSubmodules>
         </configuration>
       </plugin> -->
-      <plugin>
+<!--       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
         <version>3.1.1</version>
-      <!--  <configuration>
+       <configuration>
           <artifactItems>
             <artifactItem>
               <groupId>[ org.springframework.samples ]</groupId>
@@ -250,8 +250,8 @@
               <destFileName>[ filename ]</destFileName>
             </artifactItem>
           </artifactItems>
-        </configuration> -->
-      </plugin>
+        </configuration>
+      </plugin> -->
     </plugins>
   </build>
 
