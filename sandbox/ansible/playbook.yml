@@ -1,0 +1,28 @@
+---
+- name: Deployment of the clinic service
+  hosts: all
+  become: yes
+
+  tasks:
+
+  - name: copy artifact
+    copy:
+      src: "{{ item }}"
+      dest: /usr/local/bin/petclinic.jar
+      follow: yes
+   with_fileglob:
+      - "/var/jenkins_home/workspace/Deployment/*.jar"
+
+
+  - name: stopping the petclinic service
+    systemd:
+      name: clinic
+      state: stopped
+
+ - name: starting the petclinic service
+   systemd:
+     name: clinic
+     state: started
+
+ - debug:
+         msg: "service link: http://3.17.58.33:8080"
