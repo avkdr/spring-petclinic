@@ -37,8 +37,16 @@
     <jacoco.version>0.8.2</jacoco.version>
     <maven-deploy-plugin>2.8.2</maven-deploy-plugin>
     <maven-release-plugin>2.5.3</maven-release-plugin>
+    <git-repo>https://github.com/avkdr/spring-petclinic.git</git-repo>
+    <git-dev-conn>scm:git:git@github.com:avkdr/spring-petclinic.git</git-dev-conn>
 
   </properties>
+
+  <scm>
+    <developerConnection>${git-dev-conn}</developerConnection>
+    <url>${git-repo}</url>
+    <tag>HEAD</tag>
+  </scm>
 
   <dependencies>
     <!-- Spring and Spring Boot dependencies -->
