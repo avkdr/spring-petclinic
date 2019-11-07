@@ -3,7 +3,7 @@
 <modelVersion>4.0.0</modelVersion>
 <groupId>org.springframework.samples</groupId>
 <artifactId>spring-petclinic</artifactId>
-<version>2.3.4-SNAPSHOT</version>
+<version>2 4 4-SNAPSHOT</version>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -43,7 +43,11 @@
   <scm>
     <developerConnection>${git-dev-conn}</developerConnection>
     <url>${git-repo}</url>
+<<<<<<< HEAD
     <tag>release-2.5</tag>
+=======
+    <tag>release-2 4</tag>
+>>>>>>> 1a4b6b5da5ce7e1d1c76cae8e78cf8deda947710
   </scm>
 
   <dependencies>
