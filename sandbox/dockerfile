@@ -19,6 +19,7 @@ ENV MAVEN_HOME /usr/share/maven
 COPY settings.xml /root/.m2/settings.xml
 
 # Configure ansible
+
 COPY ./ansible/. /etc/ansible
 
 # Configure Jenkins
