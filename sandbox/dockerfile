@@ -30,4 +30,4 @@ RUN /usr/local/bin/plugins.sh ./plugins.txt
 VOLUME /root/.ssh
 
 # Start it all
-ENTRYPOINT ["/usr/local/bin/init.sh"]
+ENTRYPOINT ["/usr/local/bin/jenkins.sh"]
