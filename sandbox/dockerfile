@@ -24,6 +24,4 @@ RUN /usr/local/bin/plugins.sh ./plugins.txt
 VOLUME /root/.ssh
 
 # Start it all
-COPY init.sh /usr/local/bin/init.sh
-RUN chmod +x /usr/local/bin/init.sh
 ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/init.sh"]
