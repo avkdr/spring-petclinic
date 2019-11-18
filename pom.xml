@@ -43,7 +43,7 @@
   <scm>
     <developerConnection>${git-dev-conn}</developerConnection>
     <url>${git-repo}</url>
-    <tag>HEAD</tag>
+    <tag>release-2.3</tag>
   </scm>
 
   <dependencies>
