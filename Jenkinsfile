@@ -71,19 +71,19 @@ pipeline {
       stage('promotion builds') {
         steps {
           artifactPromotion (
-          promoterClass: 'org.jenkinsci.plugins.artifactpromotion.NexusOSSPromotor',
+          promoterClass: 'org.jenkinsci.plugins.artifactpromotion.ArtifactPromotionBuilder',
           debug: false,
-          groupId: 'com.example.test',
+          groupId: 'nexus-promotion',
           artifactId: 'my-artifact',
           version: '1.0.0',
           extension: 'zip',
           stagingRepository: 'http://35.210.215.21:8081/repository/petclinic-releases-candidates/',
-        //  stagingUser: 'foo',
-       //  stagingPW: 's3cr3t',
+          stagingUser: 'admin',
+          stagingPW: 'q1w2e3r4',
           skipDeletion: true,
           releaseRepository: 'http://35.210.215.21:8081/repository/petclinic-releases/',
-      //    releaseUser: 'foo',
-      //    releasePW: 's3cr3t'
+          releaseUser: 'admin',
+          releasePW: 'q1w2e3r4'
       )
         }
       }
