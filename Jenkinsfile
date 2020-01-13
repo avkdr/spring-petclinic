@@ -75,6 +75,7 @@ pipeline {
           debug: false,
           groupId: 'nexus-promotion',
           artifactId: 'my-artifact',
+          classifier: bin,
           version: '1.0.0',
           extension: 'zip',
           stagingRepository: 'http://35.210.215.21:8081/repository/petclinic-releases-candidates/',
