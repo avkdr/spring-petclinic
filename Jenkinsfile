@@ -68,5 +68,24 @@ pipeline {
           }
         }
       }
+      stage('promotion builds') {
+        steps {
+          artifactPromotion (
+          promoterClass: 'org.jenkinsci.plugins.artifactpromotion.NexusOSSPromotor',
+          debug: false,
+          groupId: 'com.example.test',
+          artifactId: 'my-artifact',
+          version: '1.0.0',
+          extension: 'zip',
+          stagingRepository: 'http://35.210.215.21:8081/repository/petclinic-releases-candidates/',
+        //  stagingUser: 'foo',
+       //  stagingPW: 's3cr3t',
+          skipDeletion: true,
+          releaseRepository: 'http://35.210.215.21:8081/repository/petclinic-releases/',
+      //    releaseUser: 'foo',
+      //    releasePW: 's3cr3t'
+      )
+        }
+      }
     }
 }
