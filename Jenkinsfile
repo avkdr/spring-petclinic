@@ -2,20 +2,20 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven 3.6.2'
+        maven "Maven 3.6.2"
     }
     environment {
-        NEXUS_VERSION = 'nexus3'
-        NEXUS_PROTOCOL = 'http'
-        NEXUS_URL = '35.210.215.21:8081'
-        NEXUS_REPOSITORY = 'petclinic-snapshots'
-        NEXUS_CREDENTIAL_ID = 'nexus'
+        NEXUS_VERSION = "nexus3"
+        NEXUS_PROTOCOL = "http"
+        NEXUS_URL = "35.210.215.21:8081"
+        NEXUS_REPOSITORY = "petclinic-snapshots"
+        NEXUS_CREDENTIAL_ID = "nexus"
     }
 
     stages {
       stage('clone code') {
           steps {
-            git branch: 'dev', url: 'https://github.com/avkdr/spring-petclinic.git'
+            git branch: 'dev', url: "https://github.com/avkdr/spring-petclinic.git"
           }
       }
 
@@ -29,9 +29,9 @@ pipeline {
         steps {
           script {
                   // Read POM xml file using 'readMavenPom' step , this step 'readMavenPom' is included in: https://plugins.jenkins.io/pipeline-utility-steps
-                  pom = readMavenPom file: 'pom.xml';
+                  pom = readMavenPom file: "pom.xml";
                   // Find built artifact under target folder
-                  filesByGlob = findFiles(glob: 'target/*.${pom.packaging}');
+                  filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
                   // Print some info from the artifact found
                   echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
                   // Extract the path from the File found
