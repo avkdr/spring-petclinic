@@ -10,6 +10,10 @@ pipeline {
         NEXUS_URL = "35.210.215.21:8081"
         NEXUS_REPOSITORY = "petclinic-snapshots"
         NEXUS_CREDENTIAL_ID = "nexus"
+        MAVEN_PROJECT_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec |sed 's/[a-zA-Z<>\/-]//g;s/[.]*$//')
+        TIMESTAMP=$(date "+%Y%m%d.%H%M%S")
+        GIT_HASH=$(git log -1 --pretty=%h)
+        MAVEN_UPDATED_PROJECT_VERSION="${MAVEN_PROJECT_VERSION}-${TIMESTAMP}-${GIT_HASH}"
     }
 
     stages {
@@ -38,6 +42,8 @@ pipeline {
                   artifactPath = filesByGlob[0].path;
                   // Assign to a boolean response verifying If the artifact name exists
                   artifactExists = fileExists artifactPath;
+                  def name = ${MAVEN_UPDATED_PROJECT_VERSION};
+                  echo "name"
 
                   if(artifactExists) {
                         echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
