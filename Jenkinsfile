@@ -38,9 +38,6 @@ pipeline {
                   artifactPath = filesByGlob[0].path;
                   // Assign to a boolean response verifying If the artifact name exists
                   artifactExists = fileExists artifactPath;
-                  MAVEN_PROJECT_VERSION = pom.artifactId;
-                  TIMESTAMP = java.time.LocalDateTime.now();
-                  GIT_HASH = checkout(scm).GIT_COMMIT;
 
                   if(artifactExists) {
                         echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
@@ -49,7 +46,7 @@ pipeline {
                             protocol: NEXUS_PROTOCOL,
                             nexusUrl: NEXUS_URL,
                             groupId: pom.groupId,
-                            version: "${pom.version}-${TIMESTAMP}-${GIT_HASH}",
+                            version: pom.version,
                             repository: NEXUS_REPOSITORY,
                             credentialsId: NEXUS_CREDENTIAL_ID,
                             artifacts: [
