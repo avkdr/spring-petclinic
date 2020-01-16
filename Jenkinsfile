@@ -49,9 +49,12 @@ pipeline {
                             version: pom.version,
                             repository: NEXUS_REPOSITORY,
                             credentialsId: NEXUS_CREDENTIAL_ID,
+                            TIMESTAMP = java.time.LocalDateTime.now();
+                            GIT_HASH = checkout(scm).GIT_COMMIT;
+
                             artifacts: [
                                 // Artifact generated such as .jar, .ear and .war files.
-                                [artifactId: pom.artifactId,
+                                [artifactId: '${pom.artifactId}-${TIMESTAMP}-${GIT_HASH}',
                                 classifier: '',
                                 file: artifactPath,
                                 type: pom.packaging],
