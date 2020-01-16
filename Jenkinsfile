@@ -28,7 +28,7 @@ pipeline {
       stage('upload artifact to nexus') {
         steps {
           script {
-          MAVEN_PROJECT_VERSION=${project.version}'
+          MAVEN_PROJECT_VERSION=project.version
           TIMESTAMP=java.time.LocalDateTime.now()
           GIT_HASH=checkout(scm).GIT_COMMIT
           MAVEN_UPDATED_PROJECT_VERSION="${MAVEN_PROJECT_VERSION}-${TIMESTAMP}-${GIT_HASH}"
