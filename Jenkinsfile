@@ -42,9 +42,6 @@ pipeline {
                   MAVEN_PROJECT_VERSION=pom.artifactId;
                   TIMESTAMP=java.time.LocalDateTime.now();
                   GIT_HASH=checkout(scm).GIT_COMMIT;
-                  MAVEN_UPDATED_PROJECT_VERSION="MAVEN_PROJECT_VERSION - TIMESTAMP - GIT_HASH";
-                  def name = MAVEN_UPDATED_PROJECT_VERSION;
-                  echo "name"
 
                   if(artifactExists) {
                         echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
@@ -53,7 +50,7 @@ pipeline {
                             protocol: NEXUS_PROTOCOL,
                             nexusUrl: NEXUS_URL,
                             groupId: pom.groupId,
-                            version: pom.version,
+                            version: "${pom.version}-${TIMESTAMP}-${GIT_HASH}"
                             repository: NEXUS_REPOSITORY,
                             credentialsId: NEXUS_CREDENTIAL_ID,
                             artifacts: [
