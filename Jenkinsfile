@@ -42,8 +42,8 @@ pipeline {
                   MAVEN_PROJECT_VERSION=pom.artifactId;
                   TIMESTAMP=java.time.LocalDateTime.now();
                   GIT_HASH=checkout(scm).GIT_COMMIT;
-                  MAVEN_UPDATED_PROJECT_VERSION="${MAVEN_PROJECT_VERSION}-${TIMESTAMP}-${GIT_HASH}";
-                  def name = ${MAVEN_UPDATED_PROJECT_VERSION};
+                  MAVEN_UPDATED_PROJECT_VERSION="MAVEN_PROJECT_VERSION - TIMESTAMP - GIT_HASH";
+                  def name = MAVEN_UPDATED_PROJECT_VERSION;
                   echo "name"
 
                   if(artifactExists) {
