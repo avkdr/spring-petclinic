@@ -10,6 +10,9 @@ pipeline {
         NEXUS_URL = "35.210.215.21:8081"
         NEXUS_REPOSITORY = "petclinic-snapshots"
         NEXUS_CREDENTIAL_ID = "nexus"
+        MAVEN_PROJECT_VERSION = pom.artifactId;
+        TIMESTAMP = java.time.LocalDateTime.now();
+        GIT_HASH = checkout(scm).GIT_COMMIT;
     }
 
     stages {
@@ -39,10 +42,6 @@ pipeline {
                   // Assign to a boolean response verifying If the artifact name exists
                   artifactExists = fileExists artifactPath;
 
-                  MAVEN_PROJECT_VERSION=pom.artifactId;
-                  TIMESTAMP=java.time.LocalDateTime.now();
-                  GIT_HASH=checkout(scm).GIT_COMMIT;
-
                   if(artifactExists) {
                         echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
                         nexusArtifactUploader(
@@ -50,7 +49,7 @@ pipeline {
                             protocol: NEXUS_PROTOCOL,
                             nexusUrl: NEXUS_URL,
                             groupId: pom.groupId,
-                            version: "$({pom.version}-${TIMESTAMP}-${GIT_HASH})"
+                            version: "${pom.version}-${TIMESTAMP}-${GIT_HASH}"
                             repository: NEXUS_REPOSITORY,
                             credentialsId: NEXUS_CREDENTIAL_ID,
                             artifacts: [
