@@ -55,7 +55,7 @@ pipeline {
                             artifacts: [
                                 // Artifact generated such as .jar, .ear and .war files.
                                 [artifactId: pom.artifactId,
-                                destFileName: ${pom.artifactId}-${TIMESTAMP}-${GIT_HASH}.jar,
+                                destFileName: pom.artifactId-TIMESTAMP-GIT_HASH.jar,
                                 classifier: '',
                                 file: artifactPath,
                                 type: pom.packaging],
