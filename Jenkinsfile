@@ -10,18 +10,18 @@ pipeline {
         NEXUS_URL = "35.210.215.21:8081"
         NEXUS_REPOSITORY = "petclinic-snapshots"
         NEXUS_CREDENTIAL_ID = "nexus"
-        MAVEN_PROJECT_VERSION= sh (
+        MAVEN_PROJECT_VERSION = sh (
           script: 'mvn -q -Dexec.executable=echo -Dexec.args="${project.version}" exec:exec |sed "s/[a-zA-Z<>/-]//g;s/[.]*$//"',
           returnStdout: true
           ).trim()
-        TIMESTAMP= sh (
+        TIMESTAMP = sh (
           script: 'date "+%Y%m%d.%H%M%S"',
           returnStdout: true
-          ).trim()
-        GIT_HASH= sh (
+          )
+        GIT_HASH = sh (
           script: 'git log -1 --pretty=%h',
           returnStdout: true
-          ).trim()
+          )
         MAVEN_UPDATED_PROJECT_VERSION= sh (
           script: '${MAVEN_PROJECT_VERSION}-${TIMESTAMP}-${GIT_HASH}',
           returnStdout: true
