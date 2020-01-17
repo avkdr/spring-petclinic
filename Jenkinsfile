@@ -11,7 +11,7 @@ pipeline {
         NEXUS_REPOSITORY = "petclinic-snapshots"
         NEXUS_CREDENTIAL_ID = "nexus"
         MAVEN_PROJECT_VERSION= sh (
-          script: "mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' exec:exec |sed 's/[a-zA-Z<>/-]//g;s/[.]*$//'",
+          script: "mvn -q -Dexec.executable=echo -Dexec.args='\${project.version}' exec:exec |sed 's/[a-zA-Z<>/-]//g;s/[.]*$//'",
           returnStdout: true
           ).trim()
         TIMESTAMP= sh (
