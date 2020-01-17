@@ -10,6 +10,10 @@ pipeline {
         NEXUS_URL = "35.210.215.21:8081"
         NEXUS_REPOSITORY = "petclinic-snapshots"
         NEXUS_CREDENTIAL_ID = "nexus"
+        MAVEN_PROJECT_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' exec:exec |sed 's/[a-zA-Z<>/-]//g;s/[.]*$//')
+        TIMESTAMP=$(date "+%Y%m%d.%H%M%S")
+        GIT_HASH=$(git log -1 --pretty=%h)
+        MAVEN_UPDATED_PROJECT_VERSION="${MAVEN_PROJECT_VERSION}-${TIMESTAMP}-${GIT_HASH}"
     }
 
     stages {
@@ -27,11 +31,7 @@ pipeline {
 
       stage('upload artifact to nexus') {
         steps {
-          sh 'MAVEN_PROJECT_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec | awk -F "." '{$2+=1;OFS=".";print$0}')\
-              TIMESTAMP=$(date "+%Y%m%d.%H%M%S")\
-              GIT_HASH=$(git log -1 --pretty=%h)\
-              MAVEN_UPDATED_PROJECT_VERSION="${MAVEN_PROJECT_VERSION}-${TIMESTAMP}-${GIT_HASH}"\
-              echo "VERSION=${MAVEN_UPDATED_PROJECT_VERSION}" > env.properties\n'
+          sh 'curl -v -u ${NEXUS_CREDENTIAL_ID} --upload-file ./target/spring-petclinic-${MAVEN_UPDATED_PROJECT_VERSION}.jar http://35.210.215.21:8081/repository/petclinic-snapshots/spring-petclinic-${MAVEN_UPDATED_PROJECT_VERSION}.jar'
           }
         }
       }
