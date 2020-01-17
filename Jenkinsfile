@@ -18,8 +18,14 @@ pipeline {
           script: 'date "+%Y%m%d.%H%M%S"',
           returnStdout: true
           ).trim()
-        GIT_HASH=$(git log -1 --pretty=%h)
-        MAVEN_UPDATED_PROJECT_VERSION="${MAVEN_PROJECT_VERSION}-${TIMESTAMP}-${GIT_HASH}"
+        GIT_HASH= sh (
+          script: 'git log -1 --pretty=%h',
+          returnStdout: true
+          ).trim()
+        MAVEN_UPDATED_PROJECT_VERSION= sh (
+          script: '${MAVEN_PROJECT_VERSION}-${TIMESTAMP}-${GIT_HASH}',
+          returnStdout: true
+          ).trim()
     }
 
     stages {
