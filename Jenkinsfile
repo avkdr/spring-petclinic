@@ -10,6 +10,8 @@ pipeline {
         NEXUS_URL = "35.210.215.21:8081"
         NEXUS_REPOSITORY = "petclinic-snapshots"
         NEXUS_CREDENTIAL_ID = "nexus"
+        pom = readMavenPom file: "pom.xml"
+        version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
     }
 
     stages {
@@ -21,7 +23,7 @@ pipeline {
 
       stage('make vesion') {
         steps {
-         sh 'MAVEN_PROJECT_VERSION = mvn -q -Dexec.executable=echo -Dexec.args="${project.version}" exec:exec |sed "s/[a-zA-Z<>/-]//g;s/[.]*$//"'
+         sh 'MAVEN_PROJECT_VERSION = mvn -q -Dexec.executable=echo -Dexec.args="${version}" exec:exec |sed "s/[a-zA-Z<>/-]//g;s/[.]*$//"'
          sh 'TIMESTAMP = date "+%Y%m%d.%H%M%S"'
          sh 'GIT_HASH = git log -1 --pretty=%h'
          sh 'MAVEN_UPDATED_PROJECT_VERSION = ${MAVEN_PROJECT_VERSION}-${TIMESTAMP}-${GIT_HASH}'
