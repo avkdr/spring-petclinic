@@ -21,10 +21,10 @@ pipeline {
 
       stage('make vesion') {
         steps {
-         sh 'MAVEN_PROJECT_VERSION = mvn -q -Dexec.executable=echo -Dexec.args="${project.version}" exec:exec |sed "s/[a-zA-Z<>/-]//g;s/[.]*$//" \
-         TIMESTAMP = date "+%Y%m%d.%H%M%S" \
-         GIT_HASH = git log -1 --pretty=%h \
-         MAVEN_UPDATED_PROJECT_VERSION = ${MAVEN_PROJECT_VERSION}-${TIMESTAMP}-${GIT_HASH} \n'
+         sh 'MAVEN_PROJECT_VERSION = mvn -q -Dexec.executable=echo -Dexec.args="${project.version}" exec:exec |sed "s/[a-zA-Z<>/-]//g;s/[.]*$//"'
+         sh 'TIMESTAMP = date "+%Y%m%d.%H%M%S"'
+         sh 'GIT_HASH = git log -1 --pretty=%h'
+         sh 'MAVEN_UPDATED_PROJECT_VERSION = ${MAVEN_PROJECT_VERSION}-${TIMESTAMP}-${GIT_HASH}'
         }
       }
 
@@ -36,8 +36,7 @@ pipeline {
 
       stage('upload artifact to nexus') {
         steps {
-          sh 'curl -v -u ${NEXUS_CREDENTIAL_ID} --upload-file ./target/spring-petclinic-${MAVEN_UPDATED_PROJECT_VERSION}.jar http://35.210.215.21:8081/repository/petclinic-snapshots/spring-petclinic-${MAVEN_UPDATED_PROJECT_VERSION}.jar \
-          echo bla \n'
+          sh 'curl -v -u ${NEXUS_CREDENTIAL_ID} --upload-file ./target/spring-petclinic-${MAVEN_UPDATED_PROJECT_VERSION}.jar http://35.210.215.21:8081/repository/petclinic-snapshots/spring-petclinic-${MAVEN_UPDATED_PROJECT_VERSION}.jar'
           }
         }
       }
