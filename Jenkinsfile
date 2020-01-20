@@ -28,6 +28,7 @@ pipeline {
           MAVEN_PROJECT_VERSION = sh script: 'mvn -q -Dexec.executable=echo -Dexec.args="${version}" exec:exec |sed "s/[a-zA-Z<>/-]//g;s/[.]*$//"', returnStdout: true
           GIT_HASH = sh script: 'git log -1 --pretty=%h'
           MAVEN_UPDATED_PROJECT_VERSION = "${MAVEN_PROJECT_VERSION}/${timeStamp}/${GIT_HASH}"
+          println "tesdhsiufnls ${MAVEN_UPDATED_PROJECT_VERSION} " + MAVEN_UPDATED_PROJECT_VERSION
           sh 'echo ${MAVEN_UPDATED_PROJECT_VERSION}'
           }
         }
