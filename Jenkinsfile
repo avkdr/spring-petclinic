@@ -25,9 +25,9 @@ pipeline {
       stage('make vesion') {
         steps {
           script {
-          env.MAVEN_PROJECT_VERSION = sh script: 'mvn -q -Dexec.executable=echo -Dexec.args="${version}" exec:exec |sed "s/[a-zA-Z<>/-]//g;s/[.]*$//"'
+          MAVEN_PROJECT_VERSION = sh script: 'mvn -q -Dexec.executable=echo -Dexec.args="${version}" exec:exec |sed "s/[a-zA-Z<>/-]//g;s/[.]*$//"', returnStdout: true
           env.GIT_HASH = sh script: 'git log -1 --pretty=%h'
-          env.MAVEN_UPDATED_PROJECT_VERSION = sh "${env.MAVEN_PROJECT_VERSION}/${timeStamp}/${env.GIT_HASH}/${version}"
+          env.MAVEN_UPDATED_PROJECT_VERSION = sh "${MAVEN_PROJECT_VERSION}/${timeStamp}/${env.GIT_HASH}/${version}"
           sh 'echo ${env.MAVEN_UPDATED_PROJECT_VERSION}'
           }
         }
