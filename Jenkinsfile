@@ -37,7 +37,7 @@ pipeline {
       stage('mvn build') {
           steps {
             script {
-              sh script: 'mvn clean package -Dbuild.number=${MAVEN_UPDATED_PROJECT_VERSION}', returnStdout: true
+              sh script: 'mvn clean package -Dbuild.number=${env.MAVEN_UPDATED_PROJECT_VERSION}', returnStdout: true
             }
           }
       }
