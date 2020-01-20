@@ -30,14 +30,13 @@ pipeline {
           GIT_HASH = sh script: 'git log -1 --pretty=%h', returnStdout: true
           MAVEN_UPDATED_PROJECT_VERSION = "${MAVEN_PROJECT_VERSION}/${timeStamp}/${GIT_HASH}"
           println MAVEN_UPDATED_PROJECT_VERSION
-          sh 'echo ${MAVEN_UPDATED_PROJECT_VERSION}'
           }
         }
       }
 
       stage('mvn build') {
           steps {
-            sh 'mvn clean package -Dbuild.number=-${MAVEN_UPDATED_PROJECT_VERSION}'
+            sh 'mvn clean package -Dbuild.number=${MAVEN_UPDATED_PROJECT_VERSION}'
           }
       }
 
