@@ -42,7 +42,7 @@ pipeline {
 
       stage('upload artifact to nexus') {
         steps {
-          sh 'curl -v -u ${NEXUS_CREDENTIAL_ID} --upload-file ./target/spring-petclinic-${MAVEN_PROJECT_VERSION}-${timeStamp}-{GIT_HASH}.jar http://35.210.215.21:8081/repository/petclinic-snapshots/spring-petclinic-${MAVEN_PROJECT_VERSION}-${timeStamp}-{GIT_HASH}.jar'
+          sh 'curl -v -u ${NEXUS_CREDENTIAL_ID} --upload-file ./target/spring-petclinic-${MAVEN_PROJECT_VERSION}-${timeStamp}-${GIT_HASH}.jar http://35.210.215.21:8081/repository/petclinic-snapshots/spring-petclinic-${MAVEN_PROJECT_VERSION}-${timeStamp}-${GIT_HASH}.jar'
           }
         }
       }
