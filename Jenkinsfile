@@ -12,7 +12,7 @@ pipeline {
         NEXUS_CREDENTIAL_ID = "nexus"
         pom = readMavenPom file: "pom.xml"
         version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
-        timeStamp = Calendar.getInstance().getTime().format('YYYYMMdd-hhmmss',TimeZone.getTimeZone('CST'))
+        timeStamp = Calendar.getInstance().getTime().format('YYYYMMdd-hhmm',TimeZone.getTimeZone('CST'))
     }
 
     stages {
