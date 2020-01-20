@@ -12,6 +12,7 @@ pipeline {
         NEXUS_CREDENTIAL_ID = "nexus"
         pom = readMavenPom file: "pom.xml"
         version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
+        timeStamp = Calendar.getInstance().getTime().format('YYYYMMdd-hhmmss',TimeZone.getTimeZone('CST'))
     }
 
     stages {
@@ -23,10 +24,9 @@ pipeline {
 
       stage('make vesion') {
         steps {
-         sh script: 'MAVEN_PROJECT_VERSION = mvn -q -Dexec.executable=echo -Dexec.args="${version}" exec:exec |sed "s/[a-zA-Z<>/-]//g;s/[.]*$//"'
-         sh script: 'TIMESTAMP = date "+%Y%m%d.%H%M%S"'
-         sh script: 'GIT_HASH = git log -1 --pretty=%h'
-         sh script: 'MAVEN_UPDATED_PROJECT_VERSION = ${MAVEN_PROJECT_VERSION}-${TIMESTAMP}-${GIT_HASH}'
+         MAVEN_PROJECT_VERSION = sh script: 'mvn -q -Dexec.executable=echo -Dexec.args="${version}" exec:exec |sed "s/[a-zA-Z<>/-]//g;s/[.]*$//"'
+         GIT_HASH = sh script: 'git log -1 --pretty=%h'
+         MAVEN_UPDATED_PROJECT_VERSION = sh script: '${MAVEN_PROJECT_VERSION}-${timeStamp}-${GIT_HASH}'
         }
       }
 
