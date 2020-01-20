@@ -23,10 +23,10 @@ pipeline {
 
       stage('make vesion') {
         steps {
-         sh 'MAVEN_PROJECT_VERSION = mvn -q -Dexec.executable=echo -Dexec.args="${version}" exec:exec |sed "s/[a-zA-Z<>/-]//g;s/[.]*$//"'
-         sh 'TIMESTAMP = date "+%Y%m%d.%H%M%S"'
-         sh 'GIT_HASH = git log -1 --pretty=%h'
-         sh 'MAVEN_UPDATED_PROJECT_VERSION = ${MAVEN_PROJECT_VERSION}-${TIMESTAMP}-${GIT_HASH}'
+         sh script: 'MAVEN_PROJECT_VERSION = mvn -q -Dexec.executable=echo -Dexec.args="${version}" exec:exec |sed "s/[a-zA-Z<>/-]//g;s/[.]*$//"'
+         sh script: 'TIMESTAMP = date "+%Y%m%d.%H%M%S"'
+         sh script: 'GIT_HASH = git log -1 --pretty=%h'
+         sh script: 'MAVEN_UPDATED_PROJECT_VERSION = ${MAVEN_PROJECT_VERSION}-${TIMESTAMP}-${GIT_HASH}'
         }
       }
 
