@@ -29,7 +29,7 @@ pipeline {
           MAVEN_PROJECT_VERSION = MAVEN_PROJECT_VERSION.trim()
           GIT_HASH = sh script: 'git log -1 --pretty=%h', returnStdout: true
           MAVEN_UPDATED_PROJECT_VERSION = "${MAVEN_PROJECT_VERSION}/${timeStamp}/${GIT_HASH}"
-          println "tesdhsiufnls !!!!${MAVEN_UPDATED_PROJECT_VERSION}!!!! HHHHHHHH" + MAVEN_UPDATED_PROJECT_VERSION
+          println "tesdhsiufnls !!!${MAVEN_UPDATED_PROJECT_VERSION}!!!! HHHHHHHH" + MAVEN_UPDATED_PROJECT_VERSION
           sh 'echo ${MAVEN_UPDATED_PROJECT_VERSION}'
           }
         }
