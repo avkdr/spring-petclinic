@@ -1,3 +1,6 @@
+def MAVEN_PROJECT_VERSION
+def GIT_HASH
+def MAVEN_UPDATED_PROJECT_VERSION
 pipeline {
     agent any
 
