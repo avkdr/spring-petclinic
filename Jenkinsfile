@@ -40,14 +40,14 @@ pipeline {
       stage('mvn build') {
           steps {
             script {
-              sh script: 'mvn clean package -Dbuild.number=${MAVEN_UPDATED_PROJECT_VERSION}', returnStdout: true
+              sh script: 'mvn clean package -Dbuild.number=${env.MAVEN_UPDATED_PROJECT_VERSION}', returnStdout: true
             }
           }
       }
 
       stage('upload artifact to nexus') {
         steps {
-          sh 'curl -v -u ${NEXUS_CREDENTIAL_ID} --upload-file ./target/spring-petclinic-${MAVEN_UPDATED_PROJECT_VERSION}.jar http://35.210.215.21:8081/repository/petclinic-snapshots/spring-petclinic-${MAVEN_UPDATED_PROJECT_VERSION}.jar'
+          sh 'curl -v -u ${NEXUS_CREDENTIAL_ID} --upload-file ./target/spring-petclinic-${env.MAVEN_UPDATED_PROJECT_VERSION}.jar http://35.210.215.21:8081/repository/petclinic-snapshots/spring-petclinic-${env.MAVEN_UPDATED_PROJECT_VERSION}.jar'
           }
         }
       }
