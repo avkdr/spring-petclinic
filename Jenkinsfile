@@ -13,9 +13,6 @@ pipeline {
         pom = readMavenPom file: "pom.xml"
         version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
         timeStamp = Calendar.getInstance().getTime().format('YYYYMMdd-hhmmss',TimeZone.getTimeZone('CST'))
-        MAVEN_PROJECT_VERSION = ''
-        GIT_HASH = ''
-        MAVEN_UPDATED_PROJECT_VERSION = ''
     }
 
     stages {
