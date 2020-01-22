@@ -37,7 +37,7 @@ pipeline {
       stage('mvn build') {
           steps {
             script {
-              sh "mvn clean package versions:set -DnewVersion=2.50.1-SNAPSHOT=${MAVEN_UPDATED_PROJECT_VERSION}"
+              sh "mvn clean package versions:set -DnewVersion=${MAVEN_UPDATED_PROJECT_VERSION}"
             }
           }
       }
