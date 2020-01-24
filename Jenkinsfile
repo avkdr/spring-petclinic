@@ -38,7 +38,7 @@ pipeline {
           steps {
             script {
               sh "mvn versions:set -DnewVersion=${MAVEN_UPDATED_PROJECT_VERSION}"
-              sh "mvn clean package"
+              sh "mvn clean package -DskipTest"
             }
           }
       }
@@ -46,9 +46,11 @@ pipeline {
       stage('upload artifact to nexus') {
         steps {
           script {
+              withCredentials([usernamePassword(credentialsId: ‘nexus’, passwordVariable: ‘PASS’, usernameVariable: ‘USER’)]) {
               echo MAVEN_UPDATED_PROJECT_VERSION
-              sh "curl -v -u ${USER}:${PASS} --upload-file ./target/spring-petclinic-${MAVEN_UPDATED_PROJECT_VERSION}.jar http://35.210.215.21:8081/repository/petclinic-snapshots/spring-petclinic-${MAVEN_UPDATED_PROJECT_VERSION}.jar"
               sh 'echo "curl -v -u ${USER}:${PASS} --upload-file ./target/spring-petclinic-${MAVEN_UPDATED_PROJECT_VERSION}.jar http://35.210.215.21:8081/repository/petclinic-snapshots/spring-petclinic-${MAVEN_UPDATED_PROJECT_VERSION}.jar"'
+              sh script: "curl -v -u ${USER}:${PASS} --upload-file ./target/spring-petclinic-${MAVEN_UPDATED_PROJECT_VERSION}.jar http://35.210.215.21:8081/repository/petclinic-snapshots/spring-petclinic-${MAVEN_UPDATED_PROJECT_VERSION}.jar"
+                }
               }
             }
           }
