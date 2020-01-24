@@ -48,6 +48,7 @@ pipeline {
           script {
               echo MAVEN_UPDATED_PROJECT_VERSION
               sh "curl -v -u ${USER}:${PASS} --upload-file ./target/spring-petclinic-${MAVEN_UPDATED_PROJECT_VERSION}.jar http://35.210.215.21:8081/repository/petclinic-snapshots/spring-petclinic-${MAVEN_UPDATED_PROJECT_VERSION}.jar"
+              sh 'echo "curl -v -u ${USER}:${PASS} --upload-file ./target/spring-petclinic-${MAVEN_UPDATED_PROJECT_VERSION}.jar http://35.210.215.21:8081/repository/petclinic-snapshots/spring-petclinic-${MAVEN_UPDATED_PROJECT_VERSION}.jar"'
               }
             }
           }
