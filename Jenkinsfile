@@ -50,7 +50,7 @@ pipeline {
           artifact  = "./target/spring-petclinic-${MAVEN_UPDATED_PROJECT_VERSION}.jar"
             withCredentials([usernamePassword(credentialsId: 'nexus', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
               sh """
-                curl -v -u ${USER}:${PASS} -T ${artifact} ${nexus_url}
+                curl -v -u ${USER}:${PASS} '-T ${artifact}' ${nexus_url}
                 """
               }
             }
