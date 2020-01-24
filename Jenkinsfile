@@ -46,7 +46,6 @@ pipeline {
       stage('upload artifact to nexus') {
         steps {
           script {
-            withCredentials([usernamePassword(credentialsId: 'nexus', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
               echo MAVEN_UPDATED_PROJECT_VERSION
               sh script: 'echo "curl -v -u ${USER}:${PASS} --upload-file ./target/spring-petclinic-${MAVEN_UPDATED_PROJECT_VERSION}.jar http://35.210.215.21:8081/repository/petclinic-snapshots/spring-petclinic-${MAVEN_UPDATED_PROJECT_VERSION}.jar"',returnStdout: true
               }
@@ -54,4 +53,3 @@ pipeline {
           }
         }
       }
-    }
