@@ -38,7 +38,7 @@ pipeline {
           steps {
             script {
               sh "mvn versions:set -DnewVersion=${MAVEN_UPDATED_PROJECT_VERSION}"
-              sh "mvn clean package -DskipTest"
+              sh "mvn clean package -DskipTests"
             }
           }
       }
