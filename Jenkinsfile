@@ -60,8 +60,8 @@ pipeline {
         steps {
           script {
             withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-            BRANCH_NAME = sh script: "release-\$(mvn -q -Dexec.executable=echo -Dexec.args='\${MAVEN_UPDATED_PROJECT_VERSION}' --non-recursive exec:exec | sed 's/[a-zA-Z<>/-]//g;s/[.]*$//' | head -c 3)", returnStdout: true
-            DEVELOPMENT_VERSION = \$(mvn -q -Dexec.executable=echo -Dexec.args='\${MAVEN_UPDATED_PROJECT_VERSION}' --non-recursive exec:exec | awk -F. -v OFS=. '{$2+=1} {print$0}'), returnStdout: true
+            BRANCH_NAME = sh script: "release-\$(mvn -q -Dexec.executable=echo -Dexec.args='\${MAVEN_UPDATED_PROJECT_VERSION}' --non-recursive exec:exec | sed 's/[a-zA-Z<>/-]//g;s/[.]*$//' | head -c 3)"
+            DEVELOPMENT_VERSION = \$(mvn -q -Dexec.executable=echo -Dexec.args='\${MAVEN_UPDATED_PROJECT_VERSION}' --non-recursive exec:exec | awk -F. -v OFS=. '{$2+=1} {print$0}')
             GIT_USER = 'avkdr'
             GIT_USER_MAIL = 'radkova.irina.a@gmial.com'
             CONNECTION_STRING = 'git@github.com:avkdr/spring-petclinic.git'
