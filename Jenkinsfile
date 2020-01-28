@@ -60,9 +60,9 @@ pipeline {
         steps {
           script {
             withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-            GIT_USER=avkdr
-            GIT_USER_MAIL=radkova.irina.a@gmial.com
-            CONNECTION_STRING=git@github.com:avkdr/spring-petclinic.git
+            GIT_USER = 'avkdr'
+            GIT_USER_MAIL = 'radkova.irina.a@gmial.com'
+            CONNECTION_STRING = 'git@github.com:avkdr/spring-petclinic.git'
               sh "git config --global user.name '${GIT_USER}'"
               sh "git config --global user.email '${GIT_USER_MAIL}'"
               sh "git remote set-url origin ${CONNECTION_STRING}"
@@ -71,6 +71,6 @@ pipeline {
           }
         }
       }
-          
+
         }
       }
