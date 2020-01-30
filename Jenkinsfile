@@ -56,7 +56,7 @@ pipeline {
             }
         }
 
-        stage('release') {
+        stage('release-1') {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
