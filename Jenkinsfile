@@ -63,7 +63,7 @@ pipeline {
                         echo MAKE_NAME
                         BRANCH_NAME = sh script: "release-${MAKE_NAME}" , returnStdout: true
                         echo BRANCH_NAME
-                        DEVELOPMENT_VERSION = sh script: /$MAKE_NAME | awk -F. -v OFS=. '{$2+=1} {print$0}'/, returnStdout: true
+                        DEVELOPMENT_VERSION = sh script: '${MAKE_NAME} | awk -F. -v OFS=. "{$2+=1} {print$0}"', returnStdout: true
                         echo DEVELOPMENT_VERSION
                         GIT_USER = "avkdr"
                         GIT_USER_MAIL = "radkova.irina.a@gmial.com"
