@@ -59,7 +59,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-                        MAKE_NAME = sh script: "mvn -q -Dexec.executable=echo -Dexec.args=${project.version} --non-recursive exec:exec | sed "s/[a-zA-Z<>/-]//g;s/[.]*$//" | head -c 3", returnStdout: true
+                        MAKE_NAME = sh script: 'mvn -q -Dexec.executable=echo -Dexec.args=${project.version} --non-recursive exec:exec | sed "s/[a-zA-Z<>/-]//g;s/[.]*$//" | head -c 3', returnStdout: true
                         echo MAKE_NAME
                         BRANCH_NAME = sh script: "release-${MAKE_NAME}" , returnStdout: true
                         echo BRANCH_NAME
