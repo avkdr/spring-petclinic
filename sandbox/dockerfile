@@ -4,9 +4,9 @@ USER root
 
 RUN apt-get update
 RUN apt-get install -y git
-RUN apt-get update && install software-properties-common
-RUN apt-add-repository --yes --update ppa:ansible/ansible
-RUN apt install ansible
+# RUN apt-get update && install software-properties-common
+# RUN apt-add-repository --yes --update ppa:ansible/ansible
+# RUN apt install ansible
 
 # Setup Maven
 ENV MAVEN_VERSION 3.6.0
@@ -19,7 +19,7 @@ ENV MAVEN_HOME /usr/share/maven
 COPY settings.xml /root/.m2/settings.xml
 
 # Configure ansible
-COPY ./ansible/. /etc/ansible
+# COPY ./ansible/. /etc/ansible
 
 # Configure Jenkins
 COPY plugins.txt ./plugins.txt
